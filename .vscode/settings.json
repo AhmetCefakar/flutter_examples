@@ -1,0 +1,25 @@
+{
+    "maptz.regionfolder": {
+        "[dart]": {
+            "foldEnd": "// #endregion", //Text inserted at the end of the fold
+            "foldEndRegex": "//[\\s]*#endregion", //Regex used to find fold end text.
+            /*
+             *  Text inserted at the start of the fold.
+             *  Use the `[NAME]` placeholder to indicate
+             *  where the cursor should be placed after
+             *  insertion
+            */
+            "foldStart": "// #region [NAME]",
+            "foldStartRegex": "//[\\s]*#region[\\s]*(.*)", ////Regex used to find fold start text.
+            "disableFolding": false //Turn off #region folding for this language
+        },
+        "[markdown]": {
+            "defaultFoldStartRegex": "\\<!--[\\s]*#region\\(collapsed\\)[\\s]*(.*)",
+            "foldEnd": "<!-- #endregion -->",
+            "foldEndRegex": "\\<!--[\\s]*#endregion",
+            "foldStart": "<!-- #region [NAME] -->",
+            "foldStartRegex": "\\<!--[\\s]*#region[\\s]*(.*)"
+        }
+    },
+    "notebook.kernelProviderAssociations": []
+}
