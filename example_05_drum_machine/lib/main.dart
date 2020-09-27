@@ -36,26 +36,10 @@ class DrumPage extends StatelessWidget {
               children: <Widget>[
                 // 'Expanded' widget'ı bir elemanın kapladığı alanı genişletmek için kullanılılabilir.
                 Expanded(
-                  child: FlatButton(
-                    padding: EdgeInsets.all(7.0),
-                    onPressed: () {
-                      playAudio('bip.wav'); // assets/audios/bongo.wav
-                    },
-                    child: Container(
-                      color: Colors.blueAccent,
-                    ),
-                  ),
+                  child: buildDrumPadButton('bip.wav', Colors.blueAccent),
                 ),
                 Expanded(
-                  child: FlatButton(
-                    padding: EdgeInsets.all(7.0),
-                    onPressed: () {
-                      playAudio('bongo.wav');
-                    },
-                    child: Container(
-                      color: Colors.redAccent,
-                    ),
-                  ),
+                  child: buildDrumPadButton('bongo.wav', Colors.redAccent),
                 ),
               ],
             ),
@@ -64,26 +48,10 @@ class DrumPage extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: FlatButton(
-                    padding: EdgeInsets.all(7.0),
-                    onPressed: () {
-                      playAudio('clap1.wav');
-                    },
-                    child: Container(
-                      color: Colors.amberAccent[400],
-                    ),
-                  ),
+                  child: buildDrumPadButton('clap1.wav', Colors.amberAccent[400]),
                 ),
                 Expanded(
-                  child: FlatButton(
-                    padding: EdgeInsets.all(7.0),
-                    onPressed: () {
-                      playAudio('clap2.wav');
-                    },
-                    child: Container(
-                      color: Colors.purpleAccent,
-                    ),
-                  ),
+                  child: buildDrumPadButton('clap2.wav', Colors.purpleAccent),
                 ),
               ],
             ),
@@ -92,26 +60,10 @@ class DrumPage extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: FlatButton(
-                    padding: EdgeInsets.all(7.0),
-                    onPressed: () {
-                      playAudio('clap1.wav');
-                    },
-                    child: Container(
-                      color: Colors.purple[900],
-                    ),
-                  ),
+                  child: buildDrumPadButton('clap3.wav', Colors.purple[900]),
                 ),
                 Expanded(
-                  child: FlatButton(
-                    padding: EdgeInsets.all(7.0),
-                    onPressed: () {
-                      playAudio('crash.wav');
-                    },
-                    child: Container(
-                      color: Colors.lime[300],
-                    ),
-                  ),
+                  child: buildDrumPadButton('crash.wav', Colors.lime[300]),
                 ),
               ],
             ),
@@ -120,26 +72,10 @@ class DrumPage extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: FlatButton(
-                    padding: EdgeInsets.all(7.0),
-                    onPressed: () {
-                      playAudio('how.wav');
-                    },
-                    child: Container(
-                      color: Colors.greenAccent,
-                    ),
-                  ),
+                  child: buildDrumPadButton('how.wav', Colors.greenAccent),
                 ),
                 Expanded(
-                  child: FlatButton(
-                    padding: EdgeInsets.all(7.0),
-                    onPressed: () {
-                      playAudio('oobah.wav');
-                    },
-                    child: Container(
-                      color: Colors.teal[300],
-                    ),
-                  ),
+                  child: buildDrumPadButton('oobah.wav', Colors.teal[300]),
                 ),
               ],
             ),
@@ -148,31 +84,29 @@ class DrumPage extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: FlatButton(
-                    padding: EdgeInsets.all(7.0),
-                    onPressed: () {
-                      playAudio('ridebel.wav');
-                    },
-                    child: Container(
-                      color: Colors.deepOrangeAccent[400],
-                    ),
-                  ),
+                  child: buildDrumPadButton('ridebel.wav', Colors.deepOrangeAccent[400]),
                 ),
                 Expanded(
-                  child: FlatButton(
-                    padding: EdgeInsets.all(7.0),
-                    onPressed: () {
-                      playAudio('woo.wav');
-                    },
-                    child: Container(
-                      color: Colors.indigoAccent,
-                    ),
-                  ),
+                  child: buildDrumPadButton('woo.wav', Colors.indigoAccent),
                 ),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  /// Basılınca ses veren buton oluşturulmasını renk ve ses dosyası parametrelerini alarak
+  /// gerçekleştiren metod.
+  FlatButton buildDrumPadButton(String _audioName, Color _padColor) {
+    return FlatButton(
+      padding: EdgeInsets.all(7.0),
+      onPressed: () {
+        playAudio(_audioName); // assets/audios/aaa.wav
+      },
+      child: Container(
+        color: _padColor,
       ),
     );
   }
