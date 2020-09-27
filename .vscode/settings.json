@@ -20,6 +20,5 @@
             "foldStart": "<!-- #region [NAME] -->",
             "foldStartRegex": "\\<!--[\\s]*#region[\\s]*(.*)"
         }
-    },
-    "notebook.kernelProviderAssociations": []
+    }
 }
