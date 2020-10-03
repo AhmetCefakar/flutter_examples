@@ -1,7 +1,8 @@
+import 'package:example_06_information_competition/dataProviders/questionDataProvider.dart';
 import 'package:flutter/material.dart';
 
 // Custom imports
-import 'constants.dart';
+import 'customDeclarations/constants.dart';
 
 void main() => runApp(BilgiTesti());
 
@@ -29,20 +30,13 @@ class SoruSayfasi extends StatefulWidget {
 }
 
 class _SoruSayfasiState extends State<SoruSayfasi> {
+  // Doğru yanlış iconların listesinin tutulduğu liste
   List<Widget> _answerResults = [];
-  List<String> _questions = [
-    'Titanic gelmiş geçmiş en büyük gemidir',
-    'Dünyadaki tavuk sayısı insan sayısından fazladır',
-    'Kelebeklerin ömrü bir gündür',
-    'Dünya düzdür',
-    'Kaju fıstığı aslında bir meyvenin sapıdır',
-    'Fatih Sultan Mehmet hiç patates yememiştir',
-    'Fransızlar 80 demek için, 4 - 20 der'
-  ];
 
-  List<bool> _answers = [false, true, false, false, true, true, true];
+  // Soru verisini barındıran veri sağlayıcı sınıfın nesnesinin üretilmesi
+  QuestionDataProvider _questionDataProvider = QuestionDataProvider();
 
-  // Baştan itibaren kaçıncı soruda olunduğunututa değişken
+  // Baştan itibaren kaçıncı soruda olunduğunu tuta değişken
   int _questionIndex = 0;
 
   @override
@@ -57,7 +51,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                _questions[_questionIndex],
+                _questionDataProvider.questions[_questionIndex].questionString,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20.0,
@@ -98,7 +92,8 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                       ),
                       onPressed: () {
                         setState(() {
-                          bool trueAnswer = _answers[_questionIndex];
+                          bool trueAnswer = _questionDataProvider
+                              .questions[_questionIndex].questionResult;
                           if (trueAnswer == false) {
                             _answerResults.add(constTrueAnswer);
                           } else {
@@ -125,7 +120,8 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                       child: Icon(Icons.thumb_up, size: 30.0),
                       onPressed: () {
                         setState(() {
-                          bool trueAnswer = _answers[_questionIndex];
+                          bool trueAnswer = _questionDataProvider
+                              .questions[_questionIndex].questionResult;
                           trueAnswer == true
                               ? _answerResults.add(constTrueAnswer)
                               : _answerResults.add(constFalseAnswer);
