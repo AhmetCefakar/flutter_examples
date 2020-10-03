@@ -36,9 +36,6 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
   // Soru verisini barındıran veri sağlayıcı sınıfın nesnesinin üretilmesi
   QuestionDataProvider _questionDataProvider = QuestionDataProvider();
 
-  // Baştan itibaren kaçıncı soruda olunduğunu tuta değişken
-  int _questionIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,7 +48,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                _questionDataProvider.questions[_questionIndex].questionString,
+                _questionDataProvider.getCurrentQuestionString(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20.0,
@@ -92,19 +89,16 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                       ),
                       onPressed: () {
                         setState(() {
-                          bool trueAnswer = _questionDataProvider
-                              .questions[_questionIndex].questionResult;
+                          bool trueAnswer =
+                              _questionDataProvider.getCurrentQuestionResult();
+
                           if (trueAnswer == false) {
                             _answerResults.add(constTrueAnswer);
                           } else {
                             _answerResults.add(constFalseAnswer);
                           }
-                          _questionIndex++;
 
-                          if (_questionIndex >= 7) {
-                            _questionIndex = 0;
-                            print(_questionIndex);
-                          }
+                          _questionDataProvider.setAnotherQuestion();
                         });
                       },
                     ),
@@ -120,17 +114,14 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                       child: Icon(Icons.thumb_up, size: 30.0),
                       onPressed: () {
                         setState(() {
-                          bool trueAnswer = _questionDataProvider
-                              .questions[_questionIndex].questionResult;
+                          bool trueAnswer =
+                              _questionDataProvider.getCurrentQuestionResult();
+
                           trueAnswer == true
                               ? _answerResults.add(constTrueAnswer)
                               : _answerResults.add(constFalseAnswer);
 
-                          _questionIndex++;
-
-                          if (_questionIndex >= 7) {
-                            _questionIndex = 0;
-                          }
+                          _questionDataProvider.setAnotherQuestion();
                         });
                       },
                     ),

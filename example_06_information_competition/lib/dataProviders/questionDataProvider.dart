@@ -1,7 +1,11 @@
 import 'package:example_06_information_competition/models/question.dart';
 
+/// Bu sınıf bünyesinde dışarıya soru verilerini sağlama ve soru geçişi işlemleri soyutlanmış oldu.
 class QuestionDataProvider {
-  List<Question> questions = [
+  // Baştan itibaren kaçıncı soruda olunduğunu tuta değişken
+  int _questionIndex = 0;
+
+  List<Question> _questions = [
     Question(
         questionString: 'Titanic gelmiş geçmiş en büyük gemidir',
         questionResult: false),
@@ -21,4 +25,20 @@ class QuestionDataProvider {
         questionString: 'Fransızlar 80 demek için, 4 - 20 der',
         questionResult: true)
   ];
+
+  String getCurrentQuestionString() {
+    return _questions[_questionIndex].questionString;
+  }
+
+  bool getCurrentQuestionResult() {
+    return _questions[_questionIndex].questionResult;
+  }
+
+  void setAnotherQuestion() {
+    _questionIndex++;
+
+    if (_questionIndex >= _questions.length) {
+      _questionIndex = 0;
+    }
+  }
 }
