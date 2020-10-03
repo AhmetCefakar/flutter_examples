@@ -88,18 +88,19 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                         size: 30.0,
                       ),
                       onPressed: () {
-                        setState(() {
-                          bool trueAnswer =
-                              _questionDataProvider.getCurrentQuestionResult();
+                        _clickAnsver(false);
+                        // setState(() {
+                        //   bool trueAnswer =
+                        //       _questionDataProvider.getCurrentQuestionResult();
 
-                          if (trueAnswer == false) {
-                            _answerResults.add(constTrueAnswer);
-                          } else {
-                            _answerResults.add(constFalseAnswer);
-                          }
+                        //   if (trueAnswer == false) {
+                        //     _answerResults.add(constTrueAnswer);
+                        //   } else {
+                        //     _answerResults.add(constFalseAnswer);
+                        //   }
 
-                          _questionDataProvider.setAnotherQuestion();
-                        });
+                        //   _questionDataProvider.setAnotherQuestion();
+                        // });
                       },
                     ),
                   ),
@@ -113,16 +114,17 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                       color: Colors.green[400],
                       child: Icon(Icons.thumb_up, size: 30.0),
                       onPressed: () {
-                        setState(() {
-                          bool trueAnswer =
-                              _questionDataProvider.getCurrentQuestionResult();
+                        _clickAnsver(true);
+                        // setState(() {
+                        //   bool trueAnswer =
+                        //       _questionDataProvider.getCurrentQuestionResult();
 
-                          trueAnswer == true
-                              ? _answerResults.add(constTrueAnswer)
-                              : _answerResults.add(constFalseAnswer);
+                        //   trueAnswer == true
+                        //       ? _answerResults.add(constTrueAnswer)
+                        //       : _answerResults.add(constFalseAnswer);
 
-                          _questionDataProvider.setAnotherQuestion();
-                        });
+                        //   _questionDataProvider.setAnotherQuestion();
+                        // });
                       },
                     ),
                   ),
@@ -133,5 +135,55 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
         )
       ],
     );
+  }
+
+  /// Sorulara verilen cevaba göre doğru/yanlış iconlarını ekrana basma işi her iki buton için büyü
+  /// ölçüde aynı olduğu için tek bir metoda alındı.
+  void _clickAnsver(bool querySuccessStatu) {
+    if (_questionDataProvider.isLastQuestion()) {
+      // Tüm soruların bitiminde iletişim dialoğu gösteriliyor.
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            title: new Text("Soruların Hepsini Tamamladınız"),
+            // content: new Text(""),
+            actions: <Widget>[
+              // usually buttons at the bottom of the dialog
+              new FlatButton(
+                child: new Text("Tekrar Başla"),
+                onPressed: () {
+                  setState(() {
+                    Navigator.of(context).pop();
+                    _questionDataProvider.clearState();
+                    _answerResults = [];
+                  });
+                },
+              ),
+              new FlatButton(
+                child: new Text("Devamet"),
+                onPressed: () {
+                  setState(() {
+                    Navigator.of(context).pop();
+                    _questionDataProvider.setAnotherQuestion();
+                  });
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      setState(() {
+        bool trueAnswer = _questionDataProvider.getCurrentQuestionResult();
+
+        trueAnswer == querySuccessStatu
+            ? _answerResults.add(constTrueAnswer)
+            : _answerResults.add(constFalseAnswer);
+
+        _questionDataProvider.setAnotherQuestion();
+      });
+    }
   }
 }

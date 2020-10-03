@@ -37,8 +37,20 @@ class QuestionDataProvider {
   void setAnotherQuestion() {
     _questionIndex++;
 
-    if (_questionIndex >= _questions.length) {
+    if (_questionIndex % _questions.length == 0) {
       _questionIndex = 0;
     }
+  }
+
+  bool isLastQuestion() {
+    if (_questionIndex >= _questions.length - 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void clearState() {
+    _questionIndex = 0;
   }
 }
