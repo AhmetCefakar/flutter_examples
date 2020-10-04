@@ -89,18 +89,6 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                       ),
                       onPressed: () {
                         _clickAnsver(false);
-                        // setState(() {
-                        //   bool trueAnswer =
-                        //       _questionDataProvider.getCurrentQuestionResult();
-
-                        //   if (trueAnswer == false) {
-                        //     _answerResults.add(constTrueAnswer);
-                        //   } else {
-                        //     _answerResults.add(constFalseAnswer);
-                        //   }
-
-                        //   _questionDataProvider.setAnotherQuestion();
-                        // });
                       },
                     ),
                   ),
@@ -115,16 +103,6 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                       child: Icon(Icons.thumb_up, size: 30.0),
                       onPressed: () {
                         _clickAnsver(true);
-                        // setState(() {
-                        //   bool trueAnswer =
-                        //       _questionDataProvider.getCurrentQuestionResult();
-
-                        //   trueAnswer == true
-                        //       ? _answerResults.add(constTrueAnswer)
-                        //       : _answerResults.add(constFalseAnswer);
-
-                        //   _questionDataProvider.setAnotherQuestion();
-                        // });
                       },
                     ),
                   ),
